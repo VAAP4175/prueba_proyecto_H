@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horario Escolar</title>
+    <link rel="stylesheet" href="menu_adm.css">
+    
+</head>
+<body>
+   
+</aside>
+<main>
+  <form action="guardar_horario.php" method="POST">
+    <label for="carrera">Selecciona la carrera:</label>
+    <select name="carrera">
+        <option value="LIA">Lic. en Informática Administrativa</option>
+        <option value="LD">Lic. en Derecho</option>
+        <option value="II">Ingeniería Industrial</option>
+    </select>
+
+     <label for="grupo">Selecciona el grupo:</label>
+<select name="grupo">
+    <?php
+    include('conexion.php');
+
+    // Consulta para obtener todos los grupos con grado, carrera y turno
+    $resultado = $conexion->query("SELECT id_gru, grado, carrera, grupo, turno FROM grupos");
+
+    while ($fila = $resultado->fetch_assoc()) {
+        echo "<option value='{$fila['id_gru']}'>
+                {$fila['grado']} - {$fila['carrera']} - {$fila['grupo']} ({$fila['turno']})
+              </option>";
+    }
+
+    $conexion->close();
+    ?>
+</select>
+
+
+   <table border="1">
+    <thead>
+        <tr>
+            <th>Hora</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Primeras 4 horas de 50 minutos -->
+        <tr>
+            <td>07:00 - 07:50</td>
+            <td><input type="text" name="lunes1"></td>
+            <td><input type="text" name="martes1"></td>
+            <td><input type="text" name="miercoles1"></td>
+            <td><input type="text" name="jueves1"></td>
+            <td><input type="text" name="viernes1"></td>
+        </tr>
+        <tr>
+            <td>07:50 - 08:40</td>
+            <td><input type="text" name="lunes2"></td>
+            <td><input type="text" name="martes2"></td>
+            <td><input type="text" name="miercoles2"></td>
+            <td><input type="text" name="jueves2"></td>
+            <td><input type="text" name="viernes2"></td>
+        </tr>
+        <tr>
+            <td>08:40 - 09:30</td>
+            <td><input type="text" name="lunes3"></td>
+            <td><input type="text" name="martes3"></td>
+            <td><input type="text" name="miercoles3"></td>
+            <td><input type="text" name="jueves3"></td>
+            <td><input type="text" name="viernes3"></td>
+        </tr>
+        
+        <!-- Receso de 20 minutos -->
+        <tr>
+            <td colspan="6" style="text-align: center; font-weight: bold;">Receso </td>
+        </tr>
+
+        <!-- Últimas 4 horas de 50 minutos -->
+        <tr>
+            <td>09:50 - 10:40</td>
+            <td><input type="text" name="lunes5"></td>
+            <td><input type="text" name="martes5"></td>
+            <td><input type="text" name="miercoles5"></td>
+            <td><input type="text" name="jueves5"></td>
+            <td><input type="text" name="viernes5"></td>
+        </tr>
+        <tr>
+            <td>10:40 - 11:30</td>
+            <td><input type="text" name="lunes6"></td>
+            <td><input type="text" name="martes6"></td>
+            <td><input type="text" name="miercoles6"></td>
+            <td><input type="text" name="jueves6"></td>
+            <td><input type="text" name="viernes6"></td>
+        </tr>
+        <tr>
+            <td>11:30 - 12:20</td>
+            <td><input type="text" name="lunes7"></td>
+            <td><input type="text" name="martes7"></td>
+            <td><input type="text" name="miercoles7"></td>
+            <td><input type="text" name="jueves7"></td>
+            <td><input type="text" name="viernes7"></td>
+        </tr>
+        <tr>
+            <td>12:20 - 13:10</td>
+            <td><input type="text" name="lunes8"></td>
+            <td><input type="text" name="martes8"></td>
+            <td><input type="text" name="miercoles8"></td>
+            <td><input type="text" name="jueves8"></td>
+            <td><input type="text" name="viernes8"></td>
+        </tr>
+    </tbody>
+</table>
+
+
+    <button type="submit">Guardar Horario</button>
+</form>
+
+    </main>
+<footer>UICSLP © 2025 </footer>
+</body>
+</html>
